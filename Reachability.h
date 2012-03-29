@@ -50,7 +50,18 @@ typedef enum
 typedef void (^NetworkReachable)(Reachability * reachability);
 typedef void (^NetworkUnreachable)(Reachability * reachability);
 
-@interface Reachability : NSObject
+@interface Reachability : NSObject {
+
+    SCNetworkReachabilityRef reachabilityRef;
+    dispatch_queue_t reachabilitySerialQueue;
+
+    BOOL reachableOnWWAN;
+
+    NetworkReachable reachableBlock;
+    NetworkUnreachable unreachableBlock;
+
+    id reachabilityObject;
+}
 
 @property (nonatomic, copy) NetworkReachable    reachableBlock;
 @property (nonatomic, copy) NetworkUnreachable  unreachableBlock;
